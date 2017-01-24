@@ -1,10 +1,9 @@
 from __future__ import print_function
 from tinytag import TinyTag
-import urllib2
 import os
 import urllib, re
 from bs4 import BeautifulSoup
-import urllib2
+
 import os
 
 #os.chdir("F:/Scripts python")
