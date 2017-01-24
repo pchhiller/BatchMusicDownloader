@@ -4,8 +4,6 @@ import os
 import urllib, re
 from bs4 import BeautifulSoup
 
-import os
-
 #os.chdir("F:/Scripts python")
 #print (os.getcwd())
 file = open("songs.txt", "r")
