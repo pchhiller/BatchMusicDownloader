@@ -6,10 +6,9 @@ import urllib, re
 from bs4 import BeautifulSoup
 import urllib2
 import os
-import requests
 
-os.chdir("F:/Scripts python")
-print (os.getcwd())
+#os.chdir("F:/Scripts python")
+#print (os.getcwd())
 file = open("songs.txt", "r")
 songs=[]
 for line in file:
@@ -69,12 +68,12 @@ for name in songs:
             print (status,end=" ")
 
         f.close()
-        tag = TinyTag.get('F:/Scripts python/'+file_name)
+        tag = TinyTag.get('./'+file_name)
         #print(tag.title)
-        directory='F:/Scripts python/Downloaded/'
+        directory='./Downloaded/'
         if not os.path.exists(directory):
             os.makedirs(directory)
         name=tag.title+'-'+tag.artist+'.mp3'
-        os.rename('F:/Scripts python/'+file_name,'F:/Scripts python/Downloaded/'+name)
+        os.rename('./'+file_name,'./Downloaded/'+name)
     except:
        print("Not Found")
