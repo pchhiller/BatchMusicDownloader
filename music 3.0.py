@@ -3,7 +3,7 @@ from tinytag import TinyTag
 import os
 import urllib, re
 from bs4 import BeautifulSoup
-
+import urllib2
 #os.chdir("F:/Scripts python")
 #print (os.getcwd())
 file = open("songs.txt", "r")
@@ -38,6 +38,7 @@ for name in songs:
     #print x.prettify()
     pattern = re.compile('http:\/\/data[0-9]*\.chiasenhac\.com\/downloads.*(?=mp3)')
     results = re.findall(pattern, str(x))
+    #print(results[1])
     try:
         down_link=results[1]+"mp3"
         #print(down_link)
