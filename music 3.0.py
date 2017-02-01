@@ -16,7 +16,7 @@ for name in songs:
     
     name=name.replace("\n","")
     url="http://search.chiasenhac.vn/search.php?s="
-    url=url+name
+    url=url+name+"&cat=music"    
     name=name.replace("+"," ")
     #print (url)
     response = urllib.urlopen(url)
@@ -25,7 +25,10 @@ for name in songs:
     #print (soup)
     mydivs = soup.findAll("a", { "class" : "musictitle" })
     #print (mydivs)
-    a=mydivs[0]
+    try:
+        a=mydivs[0]
+    except:
+        print(mydivs)
     a=a.get('href')
     url2="http://chiasenhac.vn/"+a
     url3=url2[:-5]+"_download.html"
@@ -34,13 +37,21 @@ for name in songs:
     page_source = response.read()
     soup = BeautifulSoup(page_source,'html.parser')
     mydivs = soup.findAll("div", { "id" : "downloadlink" })
-    x = (mydivs[0])
+    try:
+        x = (mydivs[0])
+    except:
+        print(mydivs)
     #print x.prettify()
     pattern = re.compile('http:\/\/data[0-9]*\.chiasenhac\.com\/downloads.*(?=mp3)')
     results = re.findall(pattern, str(x))
     #print(results[1])
     try:
-        down_link=results[1]+"mp3"
+        try:
+            down_link=results[1]+"mp3"
+        except:
+            print("320 kbps not available , probably")
+            print(mydivs)  
+            down_link=results[0]+"mp3"
         #print(down_link)
         file_name=name+".mp3"
         #urllib.urlretrieve(down_link,file_name)
@@ -73,5 +84,7 @@ for name in songs:
             os.makedirs(directory)
         name=tag.title+'-'+tag.artist+'.mp3'
         os.rename('./'+file_name,'./Downloaded/'+name)
-    except:
-       print("Not Found")
+    except Exception as e: 
+        print (e)
+
+
